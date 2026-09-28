@@ -1,0 +1,20 @@
+{
+  "model_family": "Ridge regression with log-transformed target",
+  "dataset": "data/processed/dvf_single_home_candidates_2025.csv",
+  "training_rows": 735202,
+  "training_start": "2025-01-01",
+  "training_end": "2025-12-31",
+  "target": "sale_price_eur",
+  "features": [
+    "built_area_m2",
+    "rooms",
+    "property_type",
+    "department_code",
+    "commune_id",
+    "postal_code"
+  ],
+  "date_feature_used": false,
+  "fixed_training_millesime": 2025,
+  "includes_previous_holdout_period": true,
+  "evaluation_note": "The temporal holdout metrics in baseline_metrics.json were measured before this refit. This full-year artifact has no independent 2025 holdout score."
+}

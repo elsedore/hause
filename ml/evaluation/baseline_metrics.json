@@ -1,0 +1,195 @@
+{
+  "dataset": "data/processed/dvf_single_home_candidates_2025.csv",
+  "target": "sale_price_eur",
+  "date_feature_used": false,
+  "temporal_split": {
+    "train_start": "2025-01-01",
+    "train_end": "2025-09-30",
+    "test_start": "2025-10-01",
+    "test_end": "2025-12-31"
+  },
+  "row_counts": {
+    "train": 547689,
+    "holdout": 187513
+  },
+  "features": [
+    "built_area_m2",
+    "rooms",
+    "property_type",
+    "department_code",
+    "commune_id",
+    "postal_code"
+  ],
+  "hgb_features": [
+    "built_area_m2",
+    "rooms",
+    "property_type",
+    "department_code",
+    "commune_id",
+    "postal_code"
+  ],
+  "hgb_categorical_encoding": "cross-fitted target encoding",
+  "candidate_grouping_caveat": "Groups use consecutive source rows with the same date and price; this is a heuristic, not a stable transaction identifier.",
+  "metrics": {
+    "global_median_baseline": {
+      "mae_eur": 125856.71669697568,
+      "median_absolute_error_eur": 78300.0,
+      "mean_error_eur": -54261.88015412265,
+      "rmse_eur": 363439.67344411276,
+      "r2": -0.02279897340281556
+    },
+    "property_type_median_baseline": {
+      "mae_eur": 125068.54000362642,
+      "median_absolute_error_eur": 76500.0,
+      "mean_error_eur": -51907.07648717689,
+      "rmse_eur": 363030.8650009583,
+      "r2": -0.02049931420637363
+    },
+    "ridge_log_target": {
+      "mae_eur": 69343.26654122185,
+      "median_absolute_error_eur": 38110.68757483733,
+      "mean_error_eur": -26467.387806497372,
+      "rmse_eur": 281415.18824544817,
+      "r2": 0.38677382744677224
+    },
+    "hist_gradient_boosting_log_target": {
+      "mae_eur": 71911.79877596986,
+      "median_absolute_error_eur": 38898.60566198471,
+      "mean_error_eur": -27829.10728690499,
+      "rmse_eur": 289369.65257004206,
+      "r2": 0.35161705604849613
+    }
+  },
+  "ridge_metrics_by_property_type": {
+    "Appartement": {
+      "mae_eur": 60785.79901687856,
+      "median_absolute_error_eur": 30674.561161747028,
+      "mean_error_eur": -23623.867974897417,
+      "rmse_eur": 187976.15427756603,
+      "r2": 0.5585920613136555
+    },
+    "Maison": {
+      "mae_eur": 77090.4284256351,
+      "median_absolute_error_eur": 46091.5637840088,
+      "mean_error_eur": -29041.655064220315,
+      "rmse_eur": 344820.14607395063,
+      "r2": 0.3142960884917473
+    }
+  },
+  "hgb_metrics_by_property_type": {
+    "Appartement": {
+      "mae_eur": 63263.27051964508,
+      "median_absolute_error_eur": 32110.626322407537,
+      "mean_error_eur": -25158.234383982806,
+      "rmse_eur": 185234.0462740215,
+      "r2": 0.5713762355408323
+    },
+    "Maison": {
+      "mae_eur": 79741.39886186818,
+      "median_absolute_error_eur": 45940.22304769214,
+      "mean_error_eur": -30247.075534259657,
+      "rmse_eur": 358438.37378749077,
+      "r2": 0.2590645732507597
+    }
+  },
+  "ridge_metrics_by_actual_price_band": {
+    "(0.149, 100000.0]": {
+      "rows": 38650,
+      "median_actual_price_eur": 70000.0,
+      "mae_eur": 42827.61758188507,
+      "median_absolute_error_eur": 24299.140816491123,
+      "mean_error_eur": 36330.47044066792,
+      "rmse_eur": 80698.4000978464,
+      "r2": -9.596318866546383
+    },
+    "(100000.0, 151948.0]": {
+      "rows": 36355,
+      "median_actual_price_eur": 128000.0,
+      "mae_eur": 34878.26340440821,
+      "median_absolute_error_eur": 25048.199348587485,
+      "mean_error_eur": 9793.649575946889,
+      "rmse_eur": 54066.50876159624,
+      "r2": -12.947062317465113
+    },
+    "(151948.0, 213000.0]": {
+      "rows": 37658,
+      "median_actual_price_eur": 180000.0,
+      "mae_eur": 41765.86942812762,
+      "median_absolute_error_eur": 33573.47061654106,
+      "mean_error_eur": -5546.120991598096,
+      "rmse_eur": 57699.77054309876,
+      "r2": -9.757193920890689
+    },
+    "(213000.0, 310400.0]": {
+      "rows": 37348,
+      "median_actual_price_eur": 253000.0,
+      "mae_eur": 56246.63112060532,
+      "median_absolute_error_eur": 47721.03652734468,
+      "mean_error_eur": -26227.6902167538,
+      "rmse_eur": 72243.58470840451,
+      "r2": -5.69481826984709
+    },
+    "(310400.0, 89100000.0]": {
+      "rows": 37502,
+      "median_actual_price_eur": 420000.0,
+      "mae_eur": 170816.46214389146,
+      "median_absolute_error_eur": 99385.60399510755,
+      "mean_error_eur": -147586.5954911254,
+      "rmse_eur": 614729.775028894,
+      "r2": 0.2453552878254498
+    }
+  },
+  "hgb_metrics_by_actual_price_band": {
+    "(0.149, 100000.0]": {
+      "rows": 38650,
+      "median_actual_price_eur": 70000.0,
+      "mae_eur": 43496.34184108378,
+      "median_absolute_error_eur": 25664.381745784198,
+      "mean_error_eur": 37196.82500264303,
+      "rmse_eur": 87143.29492700075,
+      "r2": -11.356433124464116
+    },
+    "(100000.0, 151948.0]": {
+      "rows": 36355,
+      "median_actual_price_eur": 128000.0,
+      "mae_eur": 34866.4419099487,
+      "median_absolute_error_eur": 24776.29605078863,
+      "mean_error_eur": 11259.768109345756,
+      "rmse_eur": 54144.39787411696,
+      "r2": -12.987276003146627
+    },
+    "(151948.0, 213000.0]": {
+      "rows": 37658,
+      "median_actual_price_eur": 180000.0,
+      "mae_eur": 41211.35745993718,
+      "median_absolute_error_eur": 32894.967294600174,
+      "mean_error_eur": -5434.89823639233,
+      "rmse_eur": 57111.47164369687,
+      "r2": -9.538954461452137
+    },
+    "(213000.0, 310400.0]": {
+      "rows": 37348,
+      "median_actual_price_eur": 253000.0,
+      "mae_eur": 57450.82956856049,
+      "median_absolute_error_eur": 48706.85112790842,
+      "mean_error_eur": -28160.484286638002,
+      "rmse_eur": 74213.45752820703,
+      "r2": -6.064892346961494
+    },
+    "(310400.0, 89100000.0]": {
+      "rows": 37502,
+      "median_actual_price_eur": 420000.0,
+      "mae_eur": 182339.15882170157,
+      "median_absolute_error_eur": 112469.19582403766,
+      "mean_error_eur": -154896.28248449185,
+      "rmse_eur": 631863.9085662854,
+      "r2": 0.20270115623801976
+    }
+  },
+  "unseen_category_share_in_holdout": {
+    "property_type": 0.0,
+    "department_code": 0.0,
+    "commune_id": 0.010809917179075585,
+    "postal_code": 5.332963581191704e-05
+  }
+}

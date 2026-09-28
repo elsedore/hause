@@ -1,0 +1,15 @@
+.git
+.github
+.venv
+**/__pycache__
+**/.pytest_cache
+**/.ruff_cache
+**/node_modules
+**/dist
+.env
+data/raw
+data/processed
+ml/models/*
+!ml/models/.gitkeep
+!ml/models/ridge_2025_full.joblib
+*.ipynb
