@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: hause
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./backend/Dockerfile.render
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeployTrigger: commit

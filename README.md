@@ -14,6 +14,21 @@ User → React frontend → FastAPI backend → ML prediction service → scikit
 The API exposes root and health routes plus `POST /api/v1/predictions`. The
 React form sends its request through Vite's `/api` development proxy, so local
 browser requests reach FastAPI without requiring separate CORS configuration.
+The form loads departments and commune/postal-code choices from the official
+French [Géo API](https://geo.api.gouv.fr/), through
+`GET /api/v1/locations/departments` and
+`GET /api/v1/locations/departments/{code}/communes`. These lists are cached
+in the API process. The prediction endpoint independently checks that the
+submitted department, DVF commune code, and postal code match the reference.
+The full INSEE commune identifier is converted to the suffix used by DVF; codes
+remain strings so leading zeroes are preserved.
+The browser therefore requires access to the backend and the backend requires
+internet access to refresh the official geographic lists.
+Prediction responses include an explanation based on each input's contribution
+to the fitted Ridge model in log-price space. The model has no transport or
+metro-station feature, so these are not inferred or described as causes.
+Contributions are statistical associations relative to the model's encoded
+baseline, not causal effects or guarantees.
 The prediction route validates property details and loads the locally trained
 2025 Ridge artifact on its first request. It returns `503` when that artifact
 is missing. The artifact itself is ignored by Git.
@@ -81,7 +96,8 @@ npm run dev
 
 Vite serves the page at `http://localhost:5173`.
 The form starts with sample values; submit them to exercise the full browser →
-API → model path. For local development the Vite proxy expects the API at
+API → model path. Department, commune, and postal code must be selected from
+the dependent lists. For local development the Vite proxy expects the API at
 `http://localhost:8000`; Docker Compose routes it to the `backend` service.
 
 Run quality checks from the repository root:
@@ -142,14 +158,28 @@ stage; no extra branches are created automatically.
 
 The GitHub Actions workflow runs Ruff and Pytest for the backend, frontend
 interaction tests and a production build, then builds both Docker Compose
-images on pushes and pull requests targeting `main`. Docker publishing and
-deployment will be added when those stages are ready.
+images on pushes and pull requests targeting `main`. Render watches `main`
+and deploys the web service after each pushed commit.
 
 ```text
 Code → Git → GitHub → CI (tests, lint, build) → Docker → CD → Cloud deployment
 ```
 
-Cloud deployment is intentionally out of scope for this foundation stage.
+## Déploiement sur Render
+
+Le fichier `render.yaml` décrit un service web Docker unique. L’image compile
+le frontend React puis le sert avec FastAPI ; les appels `/api` restent ainsi
+sur la même origine. Le service vérifie sa disponibilité sur `/health`.
+L’artefact `ml/models/ridge_2025_full.joblib` est inclus dans le dépôt pour
+que les prédictions soient disponibles au déploiement. Les fichiers DVF bruts
+et préparés demeurent ignorés par Git.
+
+Pour créer le service, connecter le dépôt GitHub à Render, choisir
+**New > Blueprint**, puis sélectionner ce dépôt et le fichier `render.yaml`.
+Render construira et publiera automatiquement l’application sur son URL
+`onrender.com`. Le niveau gratuit peut mettre le service en veille après une
+période d’inactivité ; la première requête suivante peut donc prendre plus de
+temps.
 
 ## Modèle et limites
 

@@ -8,9 +8,10 @@ export function HomePage() {
           <span className="brand-mark" aria-hidden="true">
             H
           </span>
-          <span>Habitat<span className="brand-dot">.</span></span>
+          <span>HAUSE<span className="brand-dot">.</span></span>
         </a>
-        <span className="topbar-note">Projet de machine learning</span>
+        <span className="topbar-note">HOUSE PRICE PREDICTION</span>
+        {/* <span className="topbar-note">@elsdore</span> */}
       </header>
 
       <section className="hero">
@@ -31,8 +32,10 @@ export function HomePage() {
       </section>
 
       <footer className="page-footer">
-        <span>HOUSE PRICE PREDICTION</span>
-        <span>Un projet pédagogique · Modèle Ridge</span>
+        <a href="https://www.linkedin.com/in/elsadore/" target="_blank" rel="noopener noreferrer">
+          <span className="footer-link">@elsadore</span>
+        </a>
+        <span>Copyrights @2026</span>
       </footer>
     </main>
   );

@@ -13,9 +13,9 @@ class PredictionRequest(BaseModel):
     property_type: Literal["Maison", "Appartement"]
     built_area_m2: float = Field(gt=0, le=10_000)
     rooms: int = Field(ge=0, le=100)
-    department_code: str = Field(min_length=1, max_length=3)
-    commune_code: str = Field(min_length=1, max_length=3)
-    postal_code: str | None = Field(default=None, max_length=10)
+    department_code: str = Field(pattern=r"^[0-9A-Z]{2,3}$")
+    commune_code: str = Field(pattern=r"^[0-9A-Z]{1,3}$")
+    postal_code: str = Field(pattern=r"^[0-9]{5}$")
 
 
 class PredictionResponse(BaseModel):
@@ -23,3 +23,12 @@ class PredictionResponse(BaseModel):
 
     predicted_price_eur: float
     model_vintage: int
+    explanations: list["PredictionExplanation"]
+
+
+class PredictionExplanation(BaseModel):
+    """A feature contribution from the fitted regression model."""
+
+    factor: str
+    direction: Literal["hausse", "baisse"]
+    contribution_percent: float

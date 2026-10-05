@@ -157,6 +157,15 @@ h1 em { color: var(--green); font-style: normal; }
   box-shadow: 0 0 0 3px rgb(53 99 77 / 10%);
 }
 
+.searchable-select { position: relative; width: 100%; min-width: 0; }
+.searchable-select input { padding-right: 2.4rem; text-overflow: ellipsis; }
+.searchable-select input:disabled { cursor: not-allowed; background: #f5f5f1; color: #898f88; }
+.searchable-select-arrow { position: absolute; top: 50%; right: 0.85rem; transform: translateY(-55%); color: #69736b; pointer-events: none; font-size: 1.1rem; }
+.searchable-select-options { position: absolute; z-index: 20; top: calc(100% + 5px); left: 0; width: 100%; max-height: min(240px, 35vh); overflow-y: auto; box-sizing: border-box; margin: 0; padding: 0.3rem; list-style: none; border: 1px solid #d9ded6; border-radius: 7px; background: #fffefa; box-shadow: 0 8px 22px rgb(28 43 33 / 14%); }
+.searchable-select-options [role="option"] { padding: 0.62rem 0.7rem; border-radius: 4px; color: #34473a; cursor: pointer; font-size: 0.84rem; font-weight: 400; }
+.searchable-select-options [role="option"]:hover, .searchable-select-options [role="option"].active { background: #edf3ee; }
+.searchable-select-options .no-options { padding: 0.7rem; color: #738078; font-size: 0.8rem; font-weight: 400; }
+
 .input-with-unit { position: relative; }
 .input-with-unit input { padding-right: 3rem; }
 .input-with-unit > span { position: absolute; top: 50%; right: 0.8rem; transform: translateY(-50%); color: #818881; font-size: 0.76rem; }
@@ -186,10 +195,17 @@ h1 em { color: var(--green); font-style: normal; }
 
 .feedback { margin: 1.2rem 0 0; padding: 1rem; border-radius: 6px; }
 .error { border: 1px solid #f0d3ce; background: #fff8f6; color: #9b3f33; font-size: 0.82rem; line-height: 1.5; }
-.result { display: grid; gap: 0.25rem; border: 1px solid #d9e6dc; background: #f3f8f3; }
-.result > span { color: #57715e; font-size: 0.75rem; font-weight: 600; }
-.result strong { color: var(--green-dark); font-family: "Avenir Next", "Segoe UI", sans-serif; font-size: 1.8rem; letter-spacing: -0.04em; }
-.result small { color: #738078; font-size: 0.72rem; }
+.result-dialog { width: min(92vw, 540px); max-height: 85vh; overflow-y: auto; border: 1px solid #d9e6dc; border-radius: 12px; padding: clamp(1.4rem, 4vw, 2rem); color: #34473a; background: #fffefa; box-shadow: 0 24px 80px #17261b33; }
+.result-dialog::backdrop { background: #17261b80; backdrop-filter: blur(3px); }
+.dialog-eyebrow { color: #738078; font-size: 0.76rem; }
+.result-dialog h2 { margin: 0.5rem 0 0; font-size: 1.5rem; }
+.dialog-price { margin: 0.45rem 0 1.2rem; color: var(--green-dark); font-family: "Avenir Next", "Segoe UI", sans-serif; font-size: clamp(2rem, 8vw, 2.8rem); font-weight: 700; letter-spacing: -0.04em; }
+.explanation { display: grid; gap: 0.55rem; padding-top: 1rem; border-top: 1px solid #d9e6dc; }
+.explanation h3 { margin: 0; color: #34473a; font-size: 1rem; }
+.explanation p, .explanation ul { margin: 0; color: #526157; font-size: 0.88rem; line-height: 1.6; }
+.explanation ul { display: grid; gap: 0.4rem; padding-left: 1.2rem; }
+.explanation .dialog-note { margin-top: 0.3rem; color: #738078; font-size: 0.78rem; }
+.dialog-close { width: 100%; margin-top: 1.2rem; border: 0; border-radius: 6px; padding: 0.85rem 1rem; color: white; background: var(--green); cursor: pointer; font: inherit; font-weight: 600; }
 
 .disclaimer { margin: 1rem 0 0; color: #8a9089; font-size: 0.68rem; line-height: 1.5; }
 
